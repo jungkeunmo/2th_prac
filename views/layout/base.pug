@@ -12,13 +12,15 @@ html(lang="en")
                 li.menus__item
                     a(href="/") home 
                 li.menus__item
-                    a(href="/signin") signin
-                li.menus__item
-                    a(href="/signup") signup 
-                li.menus__item
-                    a(href="/logout") logout
-                li.menus__item
                     a(href="/board/list") BOARD
+                if loggedIn 
+                    li.menus__item
+                        a(href="/logout") logout    
+                else    
+                    li.menus__item
+                        a(href="/signin") signin
+                    li.menus__item
+                        a(href="/signup") signup     
 
         block content 
 
