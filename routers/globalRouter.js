@@ -5,19 +5,19 @@ const checkLogin = require("../middlewares/checkLogin");
 const router = express.Router();
 
 router.get("/", checkLogin, (req, res, next) => {
-    const LoggedIn = req.session.isLoggedIn;
+    const loggedIn = req.session.isLoggedIn;
 
-    res.render("screens/main", {LoggedIn});
+    res.render("screens/main", {loggedIn});
 });
 
 router.get("/signin", checkLogin, (req, res, next) => {
-    const LoggedIn = req.session.isLoggedIn;
-    res.render("screens/signin", {LoggedIn});
+    const loggedIn = req.session.isLoggedIn;
+    res.render("screens/signin", {loggedIn});
 });
 
 router.get("/signup", checkLogin,(req, res, next) => {
-    const LoggedIn = req.session.isLoggedIn;    
-    res.render("screens/signup", {LoggedIn});
+    const loggedIn = req.session.isLoggedIn;    
+    res.render("screens/signup", {loggedIn});
 });
 
 module.exports = router;

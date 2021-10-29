@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: "JGM",
     resave: false,
-    saveUninitialized: true,  
+    saveUninitialized: true,
 }));
 
 app.use("/", globalRouter);
