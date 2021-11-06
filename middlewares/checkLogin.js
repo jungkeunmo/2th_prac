@@ -1,8 +1,11 @@
 const checkLogin = (req, res, next) => {
     //사용자가 로그인했어?
-    req.session.isLoggedIn = false;
-
-    next();
+    if (req.session.isLoggedIn) {
+        next();
+    } else {
+        req.session.isLoggedIn = false;
+        next();
+    };
 };
 
 module.exports = checkLogin;

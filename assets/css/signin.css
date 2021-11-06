@@ -1,0 +1,43 @@
+.signinBox {
+  width: 100%;
+  height: calc(100vh - 50px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.signinBox_box {
+  width: 600px;
+  height: 250px;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px #eee;
+  border: 1px solid #eee;
+}
+
+.siginForm__input {
+  width: 400px;
+  height: 25px;
+  outline: none;
+  border: 1px solid #999;
+  background: none;
+  border-radius: 5px;
+  margin: 10px;
+  padding: 0px 10px;
+}
+
+.siginForm__submit {
+  width: 200px;
+  height: 20px;
+  border: none;
+  background: skyblue;
+  border-radius: 5px;
+  color: #fff;
+
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.siginForm__submit:hover {
+  box-shadow: 4px 4px 4px #eee;
+}

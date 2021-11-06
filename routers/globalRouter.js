@@ -10,11 +10,6 @@ router.get("/", checkLogin, (req, res, next) => {
     res.render("screens/main", {loggedIn});
 });
 
-router.get("/signin", checkLogin, (req, res, next) => {
-    const loggedIn = req.session.isLoggedIn;
-    res.render("screens/signin", {loggedIn});
-});
-
 router.get("/signup", checkLogin,(req, res, next) => {
     const loggedIn = req.session.isLoggedIn;    
     res.render("screens/signup", {loggedIn});
@@ -53,6 +48,43 @@ router.post("/signup", (req, res, next) => {
         console.log(error);
         return res.status(400).send("회원가입에 실패했습니다.");
     }
+});
+
+router.get("/signin", checkLogin, (req, res, next) => {
+    const loggedIn = req.session.isLoggedIn;
+    res.render("screens/signin", {loggedIn});
+});
+
+router.post("/signin", (req, res, next) => {
+    const selectQuery = `
+        SELECT  email,
+                password,
+                name,
+                mobile
+          FROM  users
+         WHERE  email = "${req.body.signinEmail}"
+           AND  password = "${req.body.signinPassword}" 
+    `;
+
+    try {
+        db.query(selectQuery, (error, rows) => {
+            if (error) {
+                console.error(error);
+                return res.redirect("/signin");
+            }
+
+            if (rows.length === 0) {
+                return res.redirect("/signin");
+            }
+
+            req.session.isLoggedIn = true;
+            return res.redirect("/");
+        });
+
+    } catch (error) {
+        console.log(error);
+        return res.redirect("/signin");
+    };
 });
 
 module.exports = router;
