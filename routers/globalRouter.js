@@ -7,6 +7,8 @@ const router = express.Router();
 router.get("/", checkLogin, (req, res, next) => {
     const loggedIn = req.session.isLoggedIn;
 
+    console.log(req.session);
+
     res.render("screens/main", {loggedIn});
 });
 
@@ -57,7 +59,8 @@ router.get("/signin", checkLogin, (req, res, next) => {
 
 router.post("/signin", (req, res, next) => {
     const selectQuery = `
-        SELECT  email,
+        SELECT  id,
+                email,
                 password,
                 name,
                 mobile
@@ -78,6 +81,7 @@ router.post("/signin", (req, res, next) => {
             }
 
             req.session.isLoggedIn = true;
+            req.session.userId = rows[0].id;
             return res.redirect("/");
         });
 
@@ -85,6 +89,12 @@ router.post("/signin", (req, res, next) => {
         console.log(error);
         return res.redirect("/signin");
     };
+});
+
+router.get("/logout", (req, res, next) => {
+    req.session.isLoggedIn = false;
+    req.session.userId = null;
+    return res.redirect("/");
 });
 
 module.exports = router;

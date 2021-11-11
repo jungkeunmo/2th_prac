@@ -3,5 +3,15 @@ extends ../../layout/base.pug
 block content 
     section.wholeWrapper 
         section.XX__left 
-        section.rsWrapper RS WRARPPER 
+        section.rsWrapper
+            if loggedIn 
+                a.writBtn(href="/board/write") 글작성
+
+            each b in boardList
+                a.boardData(href=`/board/detail?bid=${b.id}`)
+                    div #{b.id}
+                    div #{b.title}
+                    div #{b.name}
+                    div #{b.createdAt}
+
         section.XX__right 
